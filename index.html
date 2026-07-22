@@ -15,7 +15,13 @@
         <span class="brand__logo">▶</span>
         <span class="brand__name">Watch Stats</span>
       </div>
-      <a class="ghlink" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <div class="topbar__right">
+        <div class="langswitch" role="group" aria-label="Lingua / Language">
+          <button type="button" class="langswitch__btn" data-lang-btn="it" aria-pressed="false">IT</button>
+          <button type="button" class="langswitch__btn" data-lang-btn="en" aria-pressed="false">EN</button>
+        </div>
+        <a class="ghlink" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </header>
 
@@ -23,8 +29,8 @@
 
     <!-- SCHERMATA DI CARICAMENTO -->
     <section id="uploadScreen" class="upload">
-      <h1 class="upload__title">Chi guardi davvero su YouTube?</h1>
-      <p class="upload__subtitle">
+      <h1 class="upload__title" data-i18n="upload.title">Chi guardi davvero su YouTube?</h1>
+      <p class="upload__subtitle" data-i18n-html="upload.subtitle">
         Carica il file <code>cronologia visualizzazioni.html</code> del tuo Google Takeout
         e scopri quanti video hai visto di ogni youtuber.
       </p>
@@ -32,49 +38,35 @@
       <label id="dropzone" class="dropzone" for="fileInput">
         <input type="file" id="fileInput" accept=".html,.htm" hidden>
         <div class="dropzone__icon">⬆</div>
-        <div class="dropzone__text"><strong>Trascina qui</strong> il file oppure clicca per selezionarlo</div>
-        <div class="dropzone__hint">Il file resta sul tuo dispositivo: niente viene caricato online.</div>
+        <div class="dropzone__text" data-i18n-html="dropzone.text"><strong>Trascina qui</strong> il file oppure clicca per selezionarlo</div>
+        <div class="dropzone__hint" data-i18n="dropzone.hint">Il file resta sul tuo dispositivo: niente viene caricato online.</div>
       </label>
 
       <div id="loading" class="loading hidden">
         <div class="spinner"></div>
-        <span id="loadingText">Analisi in corso…</span>
+        <span id="loadingText" data-i18n="loading.analyze">Analisi in corso…</span>
       </div>
 
       <p id="errorMsg" class="error hidden"></p>
 
       <div class="guide">
-        <h2 class="guide__title">Dove trovo questo file?</h2>
+        <h2 class="guide__title" data-i18n="guide.title">Dove trovo questo file?</h2>
         <ol class="steps">
           <li class="step">
             <span class="step__num">1</span>
-            <div class="step__body">
-              Vai su <a href="https://takeout.google.com" target="_blank" rel="noopener">takeout.google.com</a>,
-              deseleziona tutto e spunta solo <strong>YouTube e YouTube Music</strong>.
-            </div>
+            <div class="step__body" data-i18n-html="guide.step1"></div>
           </li>
           <li class="step">
             <span class="step__num">2</span>
-            <div class="step__body">
-              Clicca su <strong>«Tutti i dati di YouTube inclusi»</strong> e lascia selezionata la
-              <strong>cronologia</strong>. In <strong>«Più formati»</strong> assicurati che
-              <strong>Cronologia</strong> sia impostata su <strong>HTML</strong>.
-            </div>
+            <div class="step__body" data-i18n-html="guide.step2"></div>
           </li>
           <li class="step">
             <span class="step__num">3</span>
-            <div class="step__body">
-              Avvia l'esportazione, poi <strong>scarica</strong> l'archivio <code>.zip</code> ed
-              <strong>estrailo</strong>.
-            </div>
+            <div class="step__body" data-i18n-html="guide.step3"></div>
           </li>
           <li class="step">
             <span class="step__num">4</span>
-            <div class="step__body">
-              Apri la cartella e trascina qui sopra il file:
-              <div class="step__path">Takeout ▸ YouTube e YouTube Music ▸ cronologia ▸ <strong>cronologia visualizzazioni.html</strong></div>
-              <span class="step__note">Se il Takeout è in inglese il file si chiama <code>watch-history.html</code>.</span>
-            </div>
+            <div class="step__body" data-i18n-html="guide.step4"></div>
           </li>
         </ol>
       </div>
@@ -86,33 +78,33 @@
       <div class="stats">
         <div class="stat">
           <div class="stat__value" id="statTotal">0</div>
-          <div class="stat__label">Video guardati</div>
+          <div class="stat__label" data-i18n="stat.total">Video guardati</div>
         </div>
         <div class="stat">
           <div class="stat__value" id="statChannels">0</div>
-          <div class="stat__label">Youtuber diversi</div>
+          <div class="stat__label" data-i18n="stat.channels">Youtuber diversi</div>
         </div>
         <div class="stat">
           <div class="stat__value" id="statTop">—</div>
-          <div class="stat__label">Il tuo #1</div>
+          <div class="stat__label" data-i18n="stat.top">Il tuo #1</div>
         </div>
-        <button id="resetBtn" class="stat stat--action" title="Carica un altro file">
+        <button id="resetBtn" class="stat stat--action" data-i18n-title="reset.title" title="Carica un altro file">
           <div class="stat__value">↺</div>
-          <div class="stat__label">Nuovo file</div>
+          <div class="stat__label" data-i18n="stat.reset">Nuovo file</div>
         </button>
       </div>
 
       <div class="grid">
         <!-- Ricerca -->
         <div class="card">
-          <h2 class="card__title">Cerca uno youtuber</h2>
-          <input type="search" id="searchInput" class="search" placeholder="Es. Favij, iNoobChannel…" autocomplete="off">
+          <h2 class="card__title" data-i18n="card.search">Cerca uno youtuber</h2>
+          <input type="search" id="searchInput" class="search" data-i18n-ph="search.placeholder" placeholder="Es. Favij, iNoobChannel…" autocomplete="off">
           <div id="searchResults" class="search-results"></div>
         </div>
 
         <!-- Top 10 -->
         <div class="card">
-          <h2 class="card__title">La tua Top 10</h2>
+          <h2 class="card__title" data-i18n="card.top">La tua Top 10</h2>
           <ol id="topList" class="toplist"></ol>
         </div>
       </div>
@@ -120,9 +112,10 @@
   </main>
 
   <footer class="footer container">
-    <p>I dati vengono elaborati solo nel tuo browser. Nessuna informazione viene inviata a un server.</p>
+    <p data-i18n="footer">I dati vengono elaborati solo nel tuo browser. Nessuna informazione viene inviata a un server.</p>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/parser.js"></script>
   <script src="js/app.js"></script>
 </body>

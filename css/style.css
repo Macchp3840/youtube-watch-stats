@@ -49,8 +49,22 @@ a { color: inherit; }
   width: 30px; height: 22px; border-radius: 6px;
   background: var(--accent); color: #fff; font-size: 12px; padding-left: 2px;
 }
+.topbar__right { display: flex; align-items: center; gap: 16px; }
 .ghlink { color: var(--text-dim); text-decoration: none; font-size: 14px; }
 .ghlink:hover { color: var(--text); }
+
+/* Switch lingua IT / EN */
+.langswitch {
+  display: inline-flex; padding: 3px; gap: 2px;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px;
+}
+.langswitch__btn {
+  border: 0; background: transparent; color: var(--text-dim);
+  font: 600 13px/1 inherit; padding: 6px 12px; border-radius: 999px;
+  cursor: pointer; transition: background .15s, color .15s;
+}
+.langswitch__btn:hover { color: var(--text); }
+.langswitch__btn--active { background: var(--accent); color: #fff; }
 
 /* --- Upload --- */
 .upload { text-align: center; padding: 60px 0 40px; }

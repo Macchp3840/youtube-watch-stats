@@ -16,6 +16,7 @@ Analizza la tua **cronologia visualizzazioni di YouTube** (Google Takeout) e sco
 - 🔎 **Ricerca youtuber** — digita un nome e vedi quanti suoi video hai guardato, la posizione in classifica e la percentuale sul totale.
 - 🏆 **Top 10** dei canali più visti, con grafico a barre.
 - 📈 **Statistiche generali** — video totali guardati e numero di youtuber diversi.
+- 🌍 **Multilingua** — interfaccia con switch Italiano / Inglese.
 - 🔒 **Privacy totale** — tutto gira lato client, nessun dato inviato a un server.
 
 ### Come si usa
@@ -45,6 +46,7 @@ Analyze your **YouTube watch history** (Google Takeout) and find out how many vi
 - 🔎 **Search a YouTuber** — type a name and see how many of their videos you watched, their rank and the share of your total.
 - 🏆 **Top 10** most-watched channels, with bar chart.
 - 📈 **Overview stats** — total videos watched and number of distinct YouTubers.
+- 🌍 **Multilingual** — interface with Italian / English switch.
 - 🔒 **Fully private** — runs entirely client-side, no data sent to any server.
 
 ### How to use
@@ -71,6 +73,7 @@ youtube-watch-stats/
 ├── index.html        # interfaccia / UI
 ├── css/style.css     # stile / styling
 └── js/
+    ├── i18n.js       # traduzioni IT/EN / IT-EN translations
     ├── parser.js     # estrazione dati dall'HTML Takeout / Takeout HTML parsing
     └── app.js        # logica UI / UI logic
 ```

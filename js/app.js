@@ -1,10 +1,13 @@
 /*
  * app.js
  * Gestisce l'interfaccia: caricamento file, ricerca youtuber e classifica Top 10.
+ * Le stringhe testuali passano da window.i18n (vedi i18n.js) per il supporto multilingua.
  */
 
 (function () {
   'use strict';
+
+  const i18n = window.i18n;
 
   // --- Riferimenti al DOM ---
   const uploadScreen  = document.getElementById('uploadScreen');
@@ -24,10 +27,14 @@
   const searchResults = document.getElementById('searchResults');
   const topList       = document.getElementById('topList');
 
-  // Statistiche correnti (impostate dopo il parsing).
+  // Statistiche correnti (impostate dopo il parsing) e ultima ricerca digitata.
   let stats = null;
+  let lastQuery = '';
 
-  const nf = new Intl.NumberFormat('it-IT');
+  /** Formatta un numero secondo la lingua attiva. */
+  function fmt(n) {
+    return new Intl.NumberFormat(i18n.get() === 'it' ? 'it-IT' : 'en-US').format(n);
+  }
 
   // --- Caricamento file ---
 
@@ -55,33 +62,33 @@
     hideError();
 
     if (!/\.html?$/i.test(file.name)) {
-      showError('Seleziona un file HTML (cronologia visualizzazioni.html).');
+      showError(i18n.t('error.notHtml'));
       return;
     }
 
     loading.classList.remove('hidden');
-    loadingText.textContent = 'Lettura del file…';
+    loadingText.textContent = i18n.t('loading.read');
 
     const reader = new FileReader();
     reader.onerror = function () {
       loading.classList.add('hidden');
-      showError('Impossibile leggere il file. Riprova.');
+      showError(i18n.t('error.read'));
     };
     reader.onload = function () {
-      loadingText.textContent = 'Analisi in corso…';
+      loadingText.textContent = i18n.t('loading.analyze');
       // Lascio ridisegnare l'UI prima di eseguire il parsing (che blocca il thread).
       setTimeout(function () {
         try {
           stats = window.WatchHistoryParser.parse(reader.result);
           if (stats.totalVideos === 0) {
             loading.classList.add('hidden');
-            showError('Nessuna visualizzazione trovata. Assicurati di aver scelto il file "cronologia visualizzazioni.html".');
+            showError(i18n.t('error.noViews'));
             return;
           }
           renderResults();
         } catch (err) {
           loading.classList.add('hidden');
-          showError('Errore durante l\'analisi: ' + err.message);
+          showError(i18n.t('error.parse') + err.message);
         }
       }, 30);
     };
@@ -95,15 +102,19 @@
     uploadScreen.classList.add('hidden');
     resultsScreen.classList.remove('hidden');
 
-    statTotal.textContent    = nf.format(stats.totalVideos);
-    statChannels.textContent = nf.format(stats.channels.length);
-    statTop.textContent      = stats.channels.length ? stats.channels[0].name : '—';
-    statTop.title            = statTop.textContent;
-
+    updateStats();
     renderTop10();
     searchInput.value = '';
+    lastQuery = '';
     renderSearch('');
     searchInput.focus();
+  }
+
+  function updateStats() {
+    statTotal.textContent    = fmt(stats.totalVideos);
+    statChannels.textContent = fmt(stats.channels.length);
+    statTop.textContent      = stats.channels.length ? stats.channels[0].name : '—';
+    statTop.title            = statTop.textContent;
   }
 
   function renderTop10() {
@@ -119,7 +130,7 @@
         '<div class="toplist__body">' +
           '<div class="toplist__head">' +
             '<a class="toplist__name" href="' + ch.url + '" target="_blank" rel="noopener"></a>' +
-            '<span class="toplist__count">' + nf.format(ch.count) + '</span>' +
+            '<span class="toplist__count">' + fmt(ch.count) + '</span>' +
           '</div>' +
           '<div class="bar"><div class="bar__fill" style="width:' + (ch.count / max * 100) + '%"></div></div>' +
         '</div>';
@@ -131,7 +142,8 @@
   // --- Ricerca ---
 
   searchInput.addEventListener('input', function () {
-    renderSearch(searchInput.value);
+    lastQuery = searchInput.value;
+    renderSearch(lastQuery);
   });
 
   function renderSearch(query) {
@@ -139,7 +151,7 @@
 
     if (!q) {
       searchResults.innerHTML =
-        '<p class="search-hint">Scrivi il nome di uno youtuber per vedere quanti suoi video hai guardato.</p>';
+        '<p class="search-hint">' + escapeHtml(i18n.t('search.hint')) + '</p>';
       return;
     }
 
@@ -148,8 +160,8 @@
       .slice(0, 50);
 
     if (!matches.length) {
-      searchResults.innerHTML = '<p class="search-hint">Nessuno youtuber trovato per "' +
-        escapeHtml(query) + '".</p>';
+      searchResults.innerHTML = '<p class="search-hint">' +
+        escapeHtml(i18n.t('search.none', { q: query })) + '</p>';
       return;
     }
 
@@ -165,7 +177,7 @@
       row.innerHTML =
         '<span class="result__name"></span>' +
         '<span class="result__meta">' +
-          '<span class="result__count">' + nf.format(ch.count) + ' video</span>' +
+          '<span class="result__count">' + escapeHtml(i18n.t('result.videos', { n: fmt(ch.count) })) + '</span>' +
           '<span class="result__extra">#' + rank + ' · ' + pct.toFixed(pct < 1 ? 2 : 1) + '%</span>' +
         '</span>';
       row.querySelector('.result__name').textContent = ch.name;
@@ -177,10 +189,20 @@
 
   resetBtn.addEventListener('click', function () {
     stats = null;
+    lastQuery = '';
     fileInput.value = '';
     resultsScreen.classList.add('hidden');
     uploadScreen.classList.remove('hidden');
     hideError();
+  });
+
+  // --- Cambio lingua: ridisegna i contenuti dinamici già a schermo ---
+  i18n.onChange(function () {
+    if (stats) {
+      updateStats();
+      renderTop10();
+      renderSearch(lastQuery);
+    }
   });
 
   // --- Utility ---
@@ -197,4 +219,7 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+
+  // --- Avvio: inizializza le traduzioni ---
+  i18n.init();
 })();
