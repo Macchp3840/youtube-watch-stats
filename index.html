@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Watch Stats</title>
+  <meta name="description" content="Analizza la tua cronologia visualizzazioni di YouTube: scopri quanti video hai visto di ogni youtuber. Tutto nel browser, nessun dato caricato online.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="brand">
+        <span class="brand__logo">▶</span>
+        <span class="brand__name">Watch Stats</span>
+      </div>
+      <a class="ghlink" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- SCHERMATA DI CARICAMENTO -->
+    <section id="uploadScreen" class="upload">
+      <h1 class="upload__title">Chi guardi davvero su YouTube?</h1>
+      <p class="upload__subtitle">
+        Carica il file <code>cronologia visualizzazioni.html</code> del tuo Google Takeout
+        e scopri quanti video hai visto di ogni youtuber.
+      </p>
+
+      <label id="dropzone" class="dropzone" for="fileInput">
+        <input type="file" id="fileInput" accept=".html,.htm" hidden>
+        <div class="dropzone__icon">⬆</div>
+        <div class="dropzone__text"><strong>Trascina qui</strong> il file oppure clicca per selezionarlo</div>
+        <div class="dropzone__hint">Il file resta sul tuo dispositivo: niente viene caricato online.</div>
+      </label>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <span id="loadingText">Analisi in corso…</span>
+      </div>
+
+      <p id="errorMsg" class="error hidden"></p>
+
+      <details class="help">
+        <summary>Dove trovo questo file?</summary>
+        <ol>
+          <li>Vai su <a href="https://takeout.google.com" target="_blank" rel="noopener">takeout.google.com</a> e richiedi l'esportazione di <strong>YouTube e YouTube Music</strong>.</li>
+          <li>Nelle impostazioni scegli il formato <strong>HTML</strong> per la cronologia.</li>
+          <li>Scarica l'archivio ed estrailo.</li>
+          <li>Il file è in <code>Takeout/YouTube e YouTube Music/cronologia/cronologia visualizzazioni.html</code>
+            (in inglese: <code>watch-history.html</code>).</li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- SCHERMATA RISULTATI -->
+    <section id="resultsScreen" class="results hidden">
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat__value" id="statTotal">0</div>
+          <div class="stat__label">Video guardati</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" id="statChannels">0</div>
+          <div class="stat__label">Youtuber diversi</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value" id="statTop">—</div>
+          <div class="stat__label">Il tuo #1</div>
+        </div>
+        <button id="resetBtn" class="stat stat--action" title="Carica un altro file">
+          <div class="stat__value">↺</div>
+          <div class="stat__label">Nuovo file</div>
+        </button>
+      </div>
+
+      <div class="grid">
+        <!-- Ricerca -->
+        <div class="card">
+          <h2 class="card__title">Cerca uno youtuber</h2>
+          <input type="search" id="searchInput" class="search" placeholder="Es. Favij, iNoobChannel…" autocomplete="off">
+          <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <!-- Top 10 -->
+        <div class="card">
+          <h2 class="card__title">La tua Top 10</h2>
+          <ol id="topList" class="toplist"></ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>I dati vengono elaborati solo nel tuo browser. Nessuna informazione viene inviata a un server.</p>
+  </footer>
+
+  <script src="js/parser.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

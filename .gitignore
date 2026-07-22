@@ -1,0 +1,12 @@
+# Dati personali del Takeout — NON committare la propria cronologia
+*.html
+!index.html
+Takeout/
+takeout-*.zip
+*.zip
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
