@@ -43,16 +43,41 @@
 
       <p id="errorMsg" class="error hidden"></p>
 
-      <details class="help">
-        <summary>Dove trovo questo file?</summary>
-        <ol>
-          <li>Vai su <a href="https://takeout.google.com" target="_blank" rel="noopener">takeout.google.com</a> e richiedi l'esportazione di <strong>YouTube e YouTube Music</strong>.</li>
-          <li>Nelle impostazioni scegli il formato <strong>HTML</strong> per la cronologia.</li>
-          <li>Scarica l'archivio ed estrailo.</li>
-          <li>Il file è in <code>Takeout/YouTube e YouTube Music/cronologia/cronologia visualizzazioni.html</code>
-            (in inglese: <code>watch-history.html</code>).</li>
+      <div class="guide">
+        <h2 class="guide__title">Dove trovo questo file?</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">1</span>
+            <div class="step__body">
+              Vai su <a href="https://takeout.google.com" target="_blank" rel="noopener">takeout.google.com</a>,
+              deseleziona tutto e spunta solo <strong>YouTube e YouTube Music</strong>.
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">2</span>
+            <div class="step__body">
+              Clicca su <strong>«Tutti i dati di YouTube inclusi»</strong> e lascia selezionata la
+              <strong>cronologia</strong>. In <strong>«Più formati»</strong> assicurati che
+              <strong>Cronologia</strong> sia impostata su <strong>HTML</strong>.
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">3</span>
+            <div class="step__body">
+              Avvia l'esportazione, poi <strong>scarica</strong> l'archivio <code>.zip</code> ed
+              <strong>estrailo</strong>.
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__num">4</span>
+            <div class="step__body">
+              Apri la cartella e trascina qui sopra il file:
+              <div class="step__path">Takeout ▸ YouTube e YouTube Music ▸ cronologia ▸ <strong>cronologia visualizzazioni.html</strong></div>
+              <span class="step__note">Se il Takeout è in inglese il file si chiama <code>watch-history.html</code>.</span>
+            </div>
+          </li>
         </ol>
-      </details>
+      </div>
     </section>
 
     <!-- SCHERMATA RISULTATI -->
