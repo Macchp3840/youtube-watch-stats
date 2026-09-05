@@ -204,6 +204,88 @@ a { color: inherit; }
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
+/* --- Pulsanti "Mostra altri" / "Riduci" --- */
+.listmore {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+}
+.listmore:empty { display: none; }
+.listmore__btn {
+  font: 600 14px/1 inherit; padding: 9px 16px; border-radius: 999px;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.listmore__btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.listmore__btn--ghost { background: transparent; color: var(--text-dim); }
+.listmore__btn--ghost:hover { background: var(--surface-2); border-color: var(--border); color: var(--text); }
+.listmore__done { color: var(--text-dim); font-size: 13px; }
+.listnote { color: var(--text-dim); font-size: 13px; margin: 14px 0 0; }
+
+/* --- Classifica video --- */
+.card--wide { margin-top: 20px; }
+.card__header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; margin-bottom: 16px;
+}
+.card__header .card__title { margin: 0; }
+
+/* Interruttore miniature */
+.toggle { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; flex-shrink: 0; }
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle__track {
+  width: 38px; height: 22px; border-radius: 999px; padding: 3px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  transition: background .15s, border-color .15s;
+}
+.toggle__knob {
+  display: block; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--text-dim); transition: transform .15s, background .15s;
+}
+.toggle input:checked + .toggle__track { background: var(--accent); border-color: var(--accent); }
+.toggle input:checked + .toggle__track .toggle__knob { background: #fff; transform: translateX(16px); }
+.toggle input:focus-visible + .toggle__track { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.toggle__label { color: var(--text-dim); font-size: 13px; }
+
+.videolist { list-style: none; margin: 0; padding: 0; }
+.videolist__item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.videolist__item:last-child { border-bottom: 0; }
+.videolist__rank {
+  flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 13px; font-weight: 700;
+  background: var(--surface-2); color: var(--text-dim);
+}
+.videolist__item:nth-child(1) .videolist__rank { background: var(--accent); color: #fff; }
+.videolist__item:nth-child(2) .videolist__rank,
+.videolist__item:nth-child(3) .videolist__rank { background: var(--accent-2); color: #fff; }
+.videolist__thumb {
+  flex-shrink: 0; width: 100px; aspect-ratio: 16 / 9;
+  border-radius: 8px; overflow: hidden; background: var(--surface-2);
+  display: block;
+}
+.videolist__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.videolist__thumb--empty::after {
+  content: '▶'; display: grid; place-items: center;
+  width: 100%; height: 100%; color: var(--text-dim); font-size: 16px;
+}
+.videolist__body { flex: 1; min-width: 0; }
+.videolist__head { display: flex; justify-content: space-between; gap: 12px; }
+.videolist__title {
+  font-weight: 600; text-decoration: none;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.videolist__title:hover { color: var(--accent-2); }
+.videolist__count { color: var(--accent-2); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.videolist__channel {
+  display: block; color: var(--text-dim); font-size: 13px; text-decoration: none;
+  margin: 2px 0 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+a.videolist__channel:hover { color: var(--text); }
+.videolist__channel--none { font-style: italic; }
+
 /* --- Footer --- */
 .footer { text-align: center; color: var(--text-dim); font-size: 13px; padding: 20px 20px 40px; }
 
@@ -213,4 +295,8 @@ a { color: inherit; }
 @media (max-width: 720px) {
   .grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
+  .videolist__thumb { width: 76px; }
+  .videolist__head { flex-direction: column; gap: 0; }
+  .videolist__count { font-size: 13px; }
+  .listmore { flex-wrap: wrap; }
 }

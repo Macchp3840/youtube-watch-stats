@@ -102,17 +102,33 @@
           <div id="searchResults" class="search-results"></div>
         </div>
 
-        <!-- Top 10 -->
+        <!-- Top 10 youtuber, espandibile -->
         <div class="card">
-          <h2 class="card__title" data-i18n="card.top">La tua Top 10</h2>
+          <h2 class="card__title" data-i18n="card.top">I tuoi youtuber più visti</h2>
           <ol id="topList" class="toplist"></ol>
+          <div id="topMore" class="listmore"></div>
         </div>
+      </div>
+
+      <!-- Top 10 video, espandibile -->
+      <div class="card card--wide">
+        <div class="card__header">
+          <h2 class="card__title" data-i18n="card.videos">I tuoi video più visti</h2>
+          <label class="toggle" data-i18n-title="thumbs.title">
+            <input type="checkbox" id="thumbsCheck" checked>
+            <span class="toggle__track"><span class="toggle__knob"></span></span>
+            <span class="toggle__label" data-i18n="thumbs.label">Miniature</span>
+          </label>
+        </div>
+        <ol id="videoList" class="videolist"></ol>
+        <p id="videoNote" class="listnote"></p>
+        <div id="videoMore" class="listmore"></div>
       </div>
     </section>
   </main>
 
   <footer class="footer container">
-    <p data-i18n="footer">I dati vengono elaborati solo nel tuo browser. Nessuna informazione viene inviata a un server.</p>
+    <p data-i18n="footer">La tua cronologia viene elaborata solo nel browser e non lascia mai il tuo dispositivo. Con le miniature attive, le sole immagini di anteprima vengono richieste a YouTube.</p>
   </footer>
 
   <script src="js/i18n.js"></script>

@@ -29,9 +29,12 @@
       'stat.reset': 'Nuovo file',
       // Card
       'card.search': 'Cerca uno youtuber',
-      'card.top': 'La tua Top 10',
+      'card.top': 'I tuoi youtuber più visti',
+      'card.videos': 'I tuoi video più visti',
       'search.placeholder': 'Es. Favij, iNoobChannel…',
-      'footer': 'I dati vengono elaborati solo nel tuo browser. Nessuna informazione viene inviata a un server.',
+      'thumbs.label': 'Miniature',
+      'thumbs.title': 'Le miniature vengono scaricate dai server di YouTube: è l\'unica richiesta che esce dal tuo dispositivo. Disattivale per non farne nessuna.',
+      'footer': 'La tua cronologia viene elaborata solo nel browser e non lascia mai il tuo dispositivo. Con le miniature attive, le sole immagini di anteprima vengono richieste a YouTube.',
       // Dinamici (app.js)
       'loading.read': 'Lettura del file…',
       'loading.analyze': 'Analisi in corso…',
@@ -42,7 +45,16 @@
       'search.hint': 'Scrivi il nome di uno youtuber per vedere quanti suoi video hai guardato.',
       'search.none': 'Nessuno youtuber trovato per «{q}».',
       'result.videos': '{n} video',
-      'reset.title': 'Carica un altro file'
+      'reset.title': 'Carica un altro file',
+      'video.views': '{n} visualizzazioni',
+      'video.channelUnknown': 'Canale non disponibile',
+      'videos.empty': 'Non hai mai riguardato lo stesso video due volte.',
+      'videos.once': 'Altri {n} video guardati una sola volta, fuori classifica.',
+      'videos.once.one': 'Un altro video guardato una sola volta, fuori classifica.',
+      'list.more': 'Mostra altri {n}',
+      'list.more.one': 'Mostra l’ultimo',
+      'list.less': 'Riduci',
+      'list.allShown': 'Sono tutti.'
     },
     en: {
       // Upload screen
@@ -63,9 +75,12 @@
       'stat.reset': 'New file',
       // Cards
       'card.search': 'Search a YouTuber',
-      'card.top': 'Your Top 10',
+      'card.top': 'Your most-watched YouTubers',
+      'card.videos': 'Your most-watched videos',
       'search.placeholder': 'e.g. Favij, iNoobChannel…',
-      'footer': 'Data is processed only in your browser. No information is sent to any server.',
+      'thumbs.label': 'Thumbnails',
+      'thumbs.title': 'Thumbnails are downloaded from YouTube\'s servers: that is the only request leaving your device. Turn them off to make none.',
+      'footer': 'Your history is processed in the browser only and never leaves your device. With thumbnails on, the preview images alone are requested from YouTube.',
       // Dynamic (app.js)
       'loading.read': 'Reading the file…',
       'loading.analyze': 'Analyzing…',
@@ -76,7 +91,16 @@
       'search.hint': 'Type a YouTuber\'s name to see how many of their videos you watched.',
       'search.none': 'No YouTuber found for “{q}”.',
       'result.videos': '{n} videos',
-      'reset.title': 'Load another file'
+      'reset.title': 'Load another file',
+      'video.views': '{n} views',
+      'video.channelUnknown': 'Channel unavailable',
+      'videos.empty': 'You never watched the same video twice.',
+      'videos.once': '{n} more videos watched only once, outside the ranking.',
+      'videos.once.one': '1 more video watched only once, outside the ranking.',
+      'list.more': 'Show {n} more',
+      'list.more.one': 'Show the last one',
+      'list.less': 'Collapse',
+      'list.allShown': 'That\'s all of them.'
     }
   };
 
